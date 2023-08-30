@@ -1,7 +1,5 @@
 <?php
 
-date_default_timezone_set('Europe/Moscow');
-
 $db = new PDO(
     'mysql:host=;dbname=',
     '',
