@@ -12,19 +12,19 @@ const API_BASE_URL = BASE_URL . '/api/v4';
 
 function amo_getLastLeads()
 {
-    return amo_apiGet('/leads?' . http_build_query([
+    return amo_apiGet('/leads', [
         'limit' => 10,
         'order[created_at]' => 'desc',
-    ]));
+    ]);
 }
 
-function amo_apiGet($url)
+function amo_apiGet($url, $params = [])
 {
     $token = amo_getAndUpdateToken();
 
     $ch = curl_init();
     curl_setopt_array($ch, [
-        CURLOPT_URL => API_BASE_URL . $url,
+        CURLOPT_URL => API_BASE_URL . "$url?" . http_build_query($params),
         CURLOPT_HTTPHEADER => [
             'Content-Type: application/json',
             "Authorization: Bearer $token",
